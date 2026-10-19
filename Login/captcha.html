@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificación · Proyecto de Contabilidad</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="captcha.css">
+</head>
+<body>
+  <main class="login">
+
+    <header class="brand">
+      <img src="assets/hero.png" alt="Proyecto de Contabilidad" class="brand__logo">
+      <h1 class="brand__name">Proyecto de Contabilidad</h1>
+      <p class="brand__sub">Contabilidad empresarial</p>
+    </header>
+
+    <section class="card">
+      <h2 class="card__title">Verificación de seguridad</h2>
+      <p class="card__hint">Superaste el límite de intentos. Confirma que no eres un robot para volver a intentar.</p>
+
+      <div id="error" class="alert" role="alert" hidden>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span id="error-text"></span>
+      </div>
+
+      <!--
+        El envío lo procesa PHP: recibe el campo "g-recaptcha-response" (el widget
+        lo agrega solo al formulario) y lo valida con Google en el servidor.
+        Cambia "captcha.php" por la ruta real de tu script.
+      -->
+      <form id="captcha-form" method="post" action="captcha.php">
+
+        <!--
+          Clave de PRUEBA de Google: siempre pasa el captcha. Solo sirve para desarrollo.
+          En producción cámbiala por tu clave de sitio de https://www.google.com/recaptcha/admin
+        -->
+        <div class="captcha">
+          <div
+            class="g-recaptcha"
+            data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            data-callback="onCaptchaOk"
+            data-expired-callback="onCaptchaExpirado"
+            data-error-callback="onCaptchaError"></div>
+        </div>
+
+        <button type="submit" id="continuar" class="btn" disabled>
+          <span class="btn__spinner" aria-hidden="true" hidden></span>
+          <span id="continuar-text">Continuar</span>
+        </button>
+      </form>
+    </section>
+
+    <p class="note">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      Acceso restringido a usuarios autorizados.
+    </p>
+
+  </main>
+
+  <script src="captcha.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?hl=es" async defer></script>
+</body>
+</html>
