@@ -1,0 +1,20 @@
+/* registro.css — solo lo propio del registro. */
+.fila { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.eyebrow { margin: 28px 0 14px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow:first-of-type { margin-top: 0; }
+.ayuda { margin: -6px 0 8px; font-size: .75rem; }
+
+.field input[type="file"] { padding: 8px; font-size: .82rem; color: var(--muted); cursor: pointer; }
+.field input[type="file"]::file-selector-button { margin-right: 10px; padding: 6px 10px; font: inherit; font-size: .8rem; font-weight: 500; color: var(--ink); background: #fff; border: 0; border-radius: var(--radius); cursor: pointer; }
+
+.fuerza { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.fuerza__barra { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.fuerza__barra span { height: 4px; border-radius: 2px; background: var(--field); transition: background-color .2s; }
+.fuerza__texto { min-width: 52px; text-align: right; font-size: .75rem; color: var(--muted); }
+.fuerza[data-nivel="1"] .fuerza__barra span:nth-child(-n+1) { background: #b91c1c; }
+.fuerza[data-nivel="2"] .fuerza__barra span:nth-child(-n+2) { background: #d97706; }
+.fuerza[data-nivel="3"] .fuerza__barra span:nth-child(-n+3) { background: #65a30d; }
+.fuerza[data-nivel="4"] .fuerza__barra span:nth-child(-n+4) { background: #15803d; }
+
+@media (max-width: 560px) { .fila { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .fuerza__barra span { transition: none; } }

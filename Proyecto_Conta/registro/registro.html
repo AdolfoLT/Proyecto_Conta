@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear cuenta · Lechuty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="registro.css">
+</head>
+<body class="auth">
+
+  <aside class="panel">
+    <header class="brand">
+      <img src="../assets/img/logo.png" alt="Lechuty" class="brand__logo">
+      <p class="brand__eyebrow">Contabilidad empresarial</p>
+      <h1 class="brand__name">Lechuty</h1>
+      <p class="brand__sub">Un clásico que siempre sabe mejor</p>
+    </header>
+    <img src="../assets/img/galleta.png" alt="" class="panel__galleta">
+  </aside>
+
+  <main class="pane">
+    <section class="form form--ancho">
+      <h2 class="form__titulo">Crear cuenta</h2>
+      <p class="form__guia">Completa tus datos para solicitar acceso</p>
+      <div id="alerta" class="alert" role="alert" hidden><span id="alerta-texto"></span></div>
+
+      <form id="registro-form" enctype="multipart/form-data" novalidate>
+        <p class="eyebrow">Cuenta</p>
+        <div class="fila">
+          <div class="field"><label for="nombre">Nombre completo</label><input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Nombre y apellidos" maxlength="100" required></div>
+          <div class="field"><label for="username">Usuario</label><input id="username" name="username" type="text" autocomplete="username" placeholder="Tu usuario" minlength="3" maxlength="30" pattern="[A-Za-z0-9._\-]+" title="Entre 3 y 30 caracteres: letras, números, punto, guion y guion bajo" required></div>
+        </div>
+        <div class="field"><label for="correo">Correo electrónico</label><input id="correo" name="correo" type="email" autocomplete="email" placeholder="Tu correo" maxlength="120" required></div>
+        <div class="fila">
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <div class="field__wrap">
+              <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Mínimo 8 caracteres" minlength="8" required>
+              <button type="button" class="field__toggle" data-toggle="password" aria-pressed="false">Mostrar</button>
+            </div>
+            <div class="fuerza" id="fuerza" data-nivel="0" hidden>
+              <div class="fuerza__barra" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <span class="fuerza__texto" id="fuerza-texto" aria-live="polite"></span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="password2">Confirmar contraseña</label>
+            <div class="field__wrap">
+              <input id="password2" name="password2" type="password" autocomplete="new-password" placeholder="Repite tu contraseña" required>
+              <button type="button" class="field__toggle" data-toggle="password2" aria-pressed="false">Mostrar</button>
+            </div>
+            <p class="field__msg" id="coincide" role="status" hidden></p>
+          </div>
+        </div>
+
+        <p class="eyebrow">Perfil</p>
+        <div class="field"><label for="domicilio">Domicilio</label><textarea id="domicilio" name="domicilio" rows="3" autocomplete="street-address" placeholder="Calle, número, colonia, municipio, estado y código postal" minlength="10" maxlength="250" required></textarea></div>
+        <div class="fila">
+          <div class="field">
+            <label for="ine">INE (escaneo)</label>
+            <input id="ine" name="ine" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required>
+            <p class="field__msg" id="ine-msg" role="status" hidden></p>
+          </div>
+          <div class="field">
+            <label for="comprobante">Comprobante de domicilio</label>
+            <input id="comprobante" name="comprobante" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required>
+            <p class="field__msg" id="comprobante-msg" role="status" hidden></p>
+          </div>
+        </div>
+        <p class="suave ayuda">JPG, PNG, WEBP o PDF · máximo 5 MB por archivo.</p>
+
+        <button type="submit" id="enviar" class="btn btn--block">
+          <span class="btn__spinner" aria-hidden="true" hidden></span>
+          <span class="btn__text">Crear cuenta</span>
+        </button>
+      </form>
+
+      <p class="alt">¿Ya tienes cuenta? <a href="../login/login.html">Inicia sesión</a></p>
+      <p class="nota">Acceso restringido a usuarios autorizados.</p>
+    </section>
+  </main>
+
+  <script src="../config/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="registro.js"></script>
+</body>
+</html>

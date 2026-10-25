@@ -1,0 +1,76 @@
+/* auth.css — login, registro y captcha: panel de marca + formulario. */
+body.auth { min-height: 100vh; display: grid; grid-template-columns: minmax(300px, 5fr) 7fr; }
+
+.panel {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 40px 48px;
+  overflow: hidden;
+  background: var(--blue);
+}
+
+.brand__logo { display: block; width: 104px; height: auto; margin: -10px 0 0 -10px; }
+.brand__eyebrow { margin-top: 20px; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+
+.brand__name {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: -.035em;
+  text-transform: uppercase;
+}
+
+.brand__sub { max-width: 24ch; margin-top: 18px; font-size: 1.1rem; line-height: 1.35; }
+
+.panel__galleta { align-self: flex-end; width: min(78%, 430px); height: auto; margin: 0 -72px -72px 0; transform: rotate(-10deg); animation: galleta .7s var(--ease) .1s both; }
+
+.pane { display: grid; align-content: center; justify-items: center; padding: 48px 24px; }
+.form { width: 100%; max-width: 380px; }
+.form--ancho { max-width: 520px; }
+
+.form__titulo { font-family: var(--display); font-size: 2rem; font-weight: 800; line-height: 1.1; letter-spacing: -.025em; }
+.form__guia { margin: 8px 0 28px; font-size: .9rem; color: var(--muted); }
+.form .btn { margin-top: 12px; }
+
+.alt { margin-top: 22px; font-size: .85rem; color: var(--muted); }
+.alt a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: var(--pink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.nota { margin-top: 28px; font-size: .75rem; color: var(--muted); }
+
+.field__wrap { position: relative; }
+.field__wrap input { padding-right: 76px; }
+.field__toggle { position: absolute; top: 50%; right: 6px; transform: translateY(-50%); padding: 6px 8px; font: inherit; font-size: .75rem; font-weight: 600; color: var(--muted); background: none; border: 0; border-radius: var(--radius); cursor: pointer; }
+@media (hover: hover) and (pointer: fine) { .field__toggle:hover { color: var(--ink); } }
+
+/* Entrada única de la pantalla: se ve una vez por sesión */
+@keyframes subir { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes galleta { from { opacity: 0; transform: translate(28px, 28px) rotate(-22deg) scale(.96); } to { opacity: 1; transform: rotate(-10deg); } }
+@keyframes fundir { from { opacity: 0; } to { opacity: 1; } }
+.form > * { animation: subir .45s var(--ease) both; }
+.form > :nth-child(2) { animation-delay: 50ms; }
+.form > :nth-child(3) { animation-delay: 100ms; }
+.form > :nth-child(4) { animation-delay: 150ms; }
+.form > :nth-child(5) { animation-delay: 200ms; }
+.form > :nth-child(6) { animation-delay: 250ms; }
+
+@media (max-width: 820px) {
+  body.auth { grid-template-columns: 1fr; }
+  .panel { position: static; height: auto; gap: 0; padding: 20px; }
+  .brand { display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; }
+  .brand__logo { grid-row: span 2; width: 52px; margin: 0; }
+  .brand__eyebrow, .panel__galleta { display: none; }
+  .brand__name { margin: 0; font-size: 1.6rem; }
+  .brand__sub { max-width: none; margin: 2px 0 0; font-size: .85rem; }
+  .pane { padding: 32px 20px 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form > *, .panel__galleta { animation-name: fundir; animation-duration: .3s; }
+}

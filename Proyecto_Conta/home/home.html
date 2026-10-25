@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contabilidad · Lechuty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+
+  <header class="top">
+    <div class="wrap top__in">
+      <a class="top__marca" href="#catalogo"><img src="../assets/img/logo.png" alt="" width="40" height="34"><span>Lechuty</span></a>
+      <nav class="nav" aria-label="Módulos">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#poliza">Póliza</a>
+        <a href="#cuenta-t">Cuentas T</a>
+        <a href="#balanza">Balanza</a>
+        <a href="#estados">Estados</a>
+      </nav>
+      <div class="top__user"><span id="usuario"></span><button type="button" id="salir" class="top__salir">Cerrar sesión</button></div>
+    </div>
+  </header>
+
+  <div id="alerta" class="alert toast" role="status" hidden><span id="alerta-texto"></span></div>
+
+  <main class="wrap page">
+
+    <!-- ═══ CATÁLOGO ═══ -->
+    <section id="catalogo" data-vista="catalogo" hidden>
+      <header class="cab"><h2>Catálogo de cuentas</h2><p class="suave">Escribe el inicio de un folio para ver solo ese rango, o busca por nombre o alias.</p></header>
+      <div class="field"><label class="sr-only" for="cat-buscar">Buscar</label><input id="cat-buscar" type="search" placeholder="Buscar por folio, nombre o alias" autocomplete="off"></div>
+      <p class="suave conteo" id="cat-conteo" aria-live="polite"></p>
+      <div class="tabla-wrap tabla-wrap--alta"><table class="tabla">
+        <thead><tr><th>Folio</th><th>Cuenta</th><th>Naturaleza</th></tr></thead>
+        <tbody id="cat-filas"></tbody>
+      </table></div>
+      <div class="estado" id="cat-estado" hidden></div>
+
+      <form id="cat-form" class="subform" novalidate>
+        <h3>Nueva cuenta</h3>
+        <div class="grid">
+          <div class="field"><label for="cat-madre">Cuenta madre</label><select id="cat-madre" required></select></div>
+          <div class="field"><label for="cat-folio">Folio asignado</label><input id="cat-folio" readonly></div>
+          <div class="field"><label for="cat-nombre">Nombre</label><input id="cat-nombre" type="text" minlength="3" maxlength="100" placeholder="Nombre de la cuenta" autocomplete="off" required></div>
+          <div class="field"><label for="cat-nat">Naturaleza</label><select id="cat-nat"><option value="D">Deudora</option><option value="A">Acreedora</option></select></div>
+        </div>
+        <button type="submit" class="btn"><span class="btn__spinner" aria-hidden="true" hidden></span><span class="btn__text">Agregar cuenta</span></button>
+      </form>
+    </section>
+
+    <!-- ═══ PÓLIZA ═══ -->
+    <section id="poliza" data-vista="poliza" hidden>
+      <header class="cab"><h2>Registro de póliza</h2><p class="suave">Las cuentas que aumentan van en el Debe; las que disminuyen, en el Haber. Solo se registra cuando ambos lados cuadran.</p></header>
+      <form id="pol-form" novalidate>
+        <div class="grid">
+          <div class="field"><label for="pol-fecha">Fecha</label><input id="pol-fecha" type="date" required></div>
+          <div class="field"><label for="pol-concepto">Concepto</label><input id="pol-concepto" type="text" minlength="5" maxlength="200" placeholder="Concepto de la póliza" autocomplete="off" required></div>
+        </div>
+        <div class="tabla-wrap"><table class="tabla tabla--pol">
+          <thead><tr><th>Folio</th><th>Cuenta</th><th class="num">Debe</th><th class="num">Haber</th><th><span class="sr-only">Quitar</span></th></tr></thead>
+          <tbody id="pol-filas"></tbody>
+          <tfoot>
+            <tr><th colspan="2">Sumas</th><td class="num" id="pol-debe">$0.00</td><td class="num" id="pol-haber">$0.00</td><td></td></tr>
+            <tr><th colspan="2">Diferencia</th><td class="num" id="pol-dif" colspan="2">$0.00</td><td></td></tr>
+          </tfoot>
+        </table></div>
+        <datalist id="pol-cuentas"></datalist>
+        <p class="pol__msg" id="pol-msg" role="status"></p>
+        <div class="acciones">
+          <button type="submit" class="btn" id="pol-enviar" disabled><span class="btn__spinner" aria-hidden="true" hidden></span><span class="btn__text">Registrar póliza</span></button>
+          <button type="button" class="btn btn--ghost" id="pol-linea">Agregar línea</button>
+          <button type="button" class="btn btn--ghost" id="pol-limpiar">Limpiar</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ═══ CUENTAS T ═══ -->
+    <section id="cuenta-t" data-vista="cuenta-t" hidden>
+      <header class="cab"><h2>Cuentas T</h2><p class="suave">Elige una cuenta madre para ver el conjunto, o una subcuenta para ver solo la suya.</p></header>
+      <div class="field campo-corto"><label for="t-cuenta">Cuenta</label><select id="t-cuenta"></select></div>
+      <div class="estado" id="t-estado" hidden></div>
+      <div id="t-vista"></div>
+    </section>
+
+    <!-- ═══ BALANZA ═══ -->
+    <section id="balanza" data-vista="balanza" hidden>
+      <header class="cab"><h2>Balanza de comprobación</h2><p class="suave">Saldos iniciales del periodo anterior, movimientos del periodo y saldos finales.</p></header>
+      <form id="bal-form" class="periodo" novalidate>
+        <div class="field"><label for="bal-desde">Del</label><input id="bal-desde" type="date" required></div>
+        <div class="field"><label for="bal-hasta">Al</label><input id="bal-hasta" type="date" required></div>
+        <button type="submit" class="btn"><span class="btn__spinner" aria-hidden="true" hidden></span><span class="btn__text">Generar</span></button>
+      </form>
+      <div class="estado" id="bal-estado" hidden></div>
+      <div id="bal-vista"></div>
+    </section>
+
+    <!-- ═══ ESTADOS FINANCIEROS ═══ -->
+    <section id="estados" data-vista="estados" hidden>
+      <header class="cab"><h2>Estados financieros</h2><p class="suave">Se generan con los saldos finales de la balanza.</p></header>
+      <form id="est-form" class="periodo" novalidate>
+        <div class="field campo-largo"><label for="est-tipo">Estado</label>
+          <select id="est-tipo">
+            <option value="balance">Balance general</option>
+            <option value="resultados">Estado de resultados</option>
+            <option value="flujo_efectivo">Estado de flujos de efectivo</option>
+            <option value="cambios_situacion">Estado de cambios en la situación financiera</option>
+            <option value="cambios_capital">Estado de cambios en el capital contable</option>
+          </select></div>
+        <div class="field"><label for="est-desde">Del</label><input id="est-desde" type="date" required></div>
+        <div class="field"><label for="est-hasta">Al</label><input id="est-hasta" type="date" required></div>
+        <label class="check"><input id="est-comparar" type="checkbox"> Comparar con el periodo anterior</label>
+        <button type="submit" class="btn"><span class="btn__spinner" aria-hidden="true" hidden></span><span class="btn__text">Generar</span></button>
+      </form>
+      <div class="estado" id="est-estado" hidden></div>
+      <div id="est-vista"></div>
+    </section>
+
+  </main>
+
+  <script src="../config/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/catalogo.js"></script>
+  <script src="js/poliza.js"></script>
+  <script src="js/cuenta-t.js"></script>
+  <script src="js/balanza.js"></script>
+  <script src="js/estados.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

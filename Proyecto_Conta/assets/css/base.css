@@ -1,0 +1,133 @@
+/* base.css — tokens y piezas compartidas por todas las páginas. Marca Lechuty. */
+:root {
+  --blue: #9cd4e1;           /* campo de marca: el azul del logo */
+  --blue-soft: #e8f4f8;
+  --pink: #e59b9a;           /* acento: la nariz de la vaca (solo detalles) */
+  --milk: #fbfaf6;
+  --field: #f1eee6;
+  --line: #e8e4da;
+  --ink: #111417;
+  --ink-2: #2b3238;
+  --muted: #6b6860;
+  --focus: #2f8fa8;
+  --danger: #b91c1c;  --danger-bg: #fef2f2;
+  --ok: #15803d;      --ok-bg: #f0fdf4;
+  --radius: 4px;
+  --ease: cubic-bezier(.23, 1, .32, 1);
+  --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--milk);
+  color: var(--ink);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+h1, h2, h3, p { margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.suave { color: var(--muted); }
+.mono { font-family: var(--mono); font-size: .8rem; white-space: nowrap; }
+.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ---------- Campos ---------- */
+.field { margin-bottom: 18px; min-width: 0; }
+.field label { display: block; margin-bottom: 6px; font-size: .8rem; font-weight: 500; color: var(--muted); }
+
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: var(--field);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+
+.field textarea { min-height: 84px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: #a6a298; }
+.field input[readonly] { font-family: var(--mono); font-size: .85rem; }
+
+.field select {
+  appearance: none;
+  padding-right: 34px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6860' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  background-color: #fff;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(47, 143, 168, .22);
+}
+
+.field input.is-invalid { border-color: var(--danger); }
+.field__msg { margin-top: 6px; font-size: .78rem; color: var(--danger); overflow-wrap: anywhere; }
+.field__msg--ok { color: var(--ok); }
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color .15s, opacity .15s, transform .12s var(--ease);
+}
+
+.btn--block { width: 100%; }
+.btn--ghost { color: var(--ink); background: transparent; border-color: var(--line); }
+.btn:active:not(:disabled) { transform: scale(.98); }
+.btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not(:disabled) { background: var(--ink-2); }
+  .btn--ghost:hover:not(:disabled) { background: var(--field); }
+}
+
+.btn__spinner { width: 15px; height: 15px; border: 2px solid rgba(255, 255, 255, .4); border-top-color: #fff; border-radius: 50%; animation: giro .8s linear infinite; }
+@keyframes giro { to { transform: rotate(360deg); } }
+
+/* ---------- Alertas ---------- */
+.alert { margin-bottom: 20px; padding: 10px 12px; border-radius: var(--radius); font-size: .85rem; }
+.alert--error { background: var(--danger-bg); color: var(--danger); }
+.alert--ok { background: var(--ok-bg); color: var(--ok); }
+
+/* Aviso flotante (home): entra desde arriba, sale más rápido */
+.toast { position: fixed; z-index: 10; top: 16px; right: 16px; max-width: min(380px, calc(100vw - 32px)); margin: 0; box-shadow: 0 6px 24px rgba(17, 20, 23, .12); transition: opacity .2s var(--ease), transform .2s var(--ease); }
+.toast.is-out { opacity: 0; transform: translateY(-6px); transition-duration: .15s; }
+@starting-style { .toast { opacity: 0; transform: translateY(-8px); } }
+
+/* ---------- Estados de una zona ---------- */
+.estado { padding: 24px 0; font-size: .88rem; color: var(--muted); }
+.estado--error { color: var(--danger); }
+.estado--cargando::before { content: ""; display: inline-block; width: 13px; height: 13px; margin-right: 8px; vertical-align: -2px; border: 2px solid var(--line); border-top-color: var(--ink); border-radius: 50%; animation: giro .8s linear infinite; }
+
+/* ---------- Tablas ---------- */
+.tabla-wrap { overflow-x: auto; }
+.tabla { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.tabla th, .tabla td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); }
+.tabla thead th { font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.tabla th.num, .tabla td.num { text-align: right; }
+.tabla .es-madre td { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn__spinner, .estado--cargando::before { animation-duration: 2s; }
+  .toast { transition: opacity .2s; }
+  @starting-style { .toast { transform: none; } }
+}

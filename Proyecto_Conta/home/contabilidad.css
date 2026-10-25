@@ -1,0 +1,83 @@
+/* Extiende home.css con las piezas del módulo contable (mismos tokens). */
+.tabla-wrap { overflow-x: auto; margin-top: 16px; border: 1px solid var(--border); border-radius: var(--radius); }
+.tabla-wrap--alta { max-height: 300px; overflow-y: auto; }
+.tabla { width: 100%; border-collapse: collapse; font-size: .85rem; font-variant-numeric: tabular-nums; }
+.tabla th, .tabla td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+.tabla thead th { position: sticky; top: 0; background: var(--bg); font-size: .75rem; font-weight: 600; color: var(--text-muted); }
+.tabla tbody tr:last-child td { border-bottom: 0; }
+.tabla .num { text-align: right; white-space: nowrap; }
+.tabla .folio { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: .8rem; white-space: nowrap; }
+.tabla tfoot th, .tabla tfoot td { font-weight: 600; background: var(--bg); }
+.tabla tr[data-folio] { cursor: pointer; }
+.tabla tr[data-folio]:hover td { background: var(--bg); }
+.tabla .madre td { font-weight: 600; }
+.tabla .nulo { color: #a8a29e; }
+.nota { min-height: 1.4em; margin: 12px 0 0; font-size: .8rem; color: var(--text-muted); }
+.nota.is-error { color: var(--danger); }
+.nota.is-ok { color: var(--ok); }
+.subform { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); }
+.field input[readonly] { background: var(--bg); font-family: ui-monospace, Menlo, monospace; }
+.field input[type="search"] { appearance: none; }
+
+/* Captura de póliza: en el Haber el nombre se recorre, como en el formato del requerimiento */
+.tabla--poliza td { padding: 4px 8px; }
+.tabla--poliza input { width: 100%; padding: 7px 8px; font: inherit; font-variant-numeric: tabular-nums; text-align: right; color: var(--text); background: var(--surface); border: 1px solid transparent; border-radius: 6px; }
+.tabla--poliza input:hover { border-color: var(--border); }
+.tabla--poliza input:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px rgba(47, 143, 168, .22); }
+.tabla--poliza .in-folio { min-width: 118px; text-align: left; font-family: ui-monospace, Menlo, monospace; font-size: .8rem; }
+.tabla--poliza .nombre { transition: padding-left .15s ease-out; }
+.tabla--poliza tr.es-haber .nombre { padding-left: 28px; }
+.tabla--poliza .nombre .bad { color: var(--danger); }
+#p-dif.ok { color: var(--ok); }
+#p-dif.bad { color: var(--danger); }
+
+/* Cuenta T */
+.cuenta-t { max-width: 520px; margin: 20px auto 0; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; font-variant-numeric: tabular-nums; }
+.cuenta-t__titulo { margin: 0; padding: 8px 12px; text-align: center; font-size: .85rem; font-weight: 600; background: #fef9c3; border-bottom: 1px solid var(--border); }
+.cuenta-t__lados { display: grid; grid-template-columns: 1fr 1fr; }
+.cuenta-t__lados > div + div { border-left: 1px solid var(--border); }
+.cuenta-t__lado { min-height: 56px; margin: 0; padding: 6px 0; list-style: none; font-size: .85rem; }
+.cuenta-t__lado li { display: flex; justify-content: space-between; gap: 12px; padding: 3px 12px; }
+.cuenta-t__lado .ref { color: var(--text-muted); }
+.cuenta-t__sumas { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--text); font-weight: 600; font-size: .85rem; }
+.cuenta-t__sumas span { padding: 6px 12px; text-align: right; }
+.cuenta-t__saldo { padding: 8px 12px; text-align: center; font-size: .85rem; background: var(--bg); border-top: 1px solid var(--border); }
+.subcuentas { display: flex; flex-wrap: wrap; gap: 8px; max-width: 520px; margin: 16px auto 0; }
+.chip { padding: 5px 10px; font: inherit; font-size: .78rem; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; transition: background .15s, transform .1s; }
+.chip:hover { background: var(--bg); }
+.chip:active { transform: scale(.97); }
+.chip:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Encabezado de estado (nombre, empresa, periodo) */
+.estado-head { margin: 0 0 4px; text-align: center; }
+.estado-head strong { display: block; font-size: 1rem; }
+.estado-head span { display: block; font-size: .8rem; color: var(--text-muted); }
+
+.btn:active:not(:disabled) { transform: scale(.97); }
+.btn { transition: background .15s, transform .1s; }
+.tab { transition: background .15s, color .15s; }
+@media (max-width: 640px) { .cuenta-t__sumas span, .cuenta-t__lado li { padding-inline: 8px; } }
+@media (prefers-reduced-motion: reduce) { .tabla--poliza .nombre, .btn, .chip { transition: none; } }
+
+/* ---------- Marca Lechuty en el home ---------- */
+:root { --blue: #9cd4e1; --blue-soft: #e3f2f6; --pink: #e59b9a; --display: "Archivo", "Arial Black", "Helvetica Neue", Arial, sans-serif; --ease: cubic-bezier(.23, 1, .32, 1); }
+
+.topbar { background: var(--blue); border-bottom: 0; }
+.topbar__inner { align-items: center; }
+.topbar__brand { display: flex; align-items: center; gap: 12px; }
+.topbar__logo { display: block; width: 40px; height: auto; }
+.topbar__title { font-family: var(--display); font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em; text-transform: uppercase; }
+.topbar__crumb { color: var(--text); opacity: .75; }
+
+.tab[aria-selected="true"] { background: var(--blue); box-shadow: none; }
+.stat__value { font-family: var(--display); font-weight: 800; letter-spacing: -.03em; }
+.panel__title { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; }
+.cuenta-t__titulo { background: var(--blue-soft); }
+.chip:hover { background: var(--blue-soft); }
+.tabla tr[data-folio]:hover td { background: var(--blue-soft); }
+
+/* Movimiento: el aviso entra desde arriba (ocasional); el estado de cuadre cambia de color con suavidad */
+.aviso { transition: opacity .2s ease-out, transform .2s var(--ease); }
+@starting-style { .aviso { opacity: 0; transform: translateY(-6px); } }
+#p-dif { transition: color .15s; }
+@media (prefers-reduced-motion: reduce) { .aviso { transition: opacity .2s; } @starting-style { .aviso { transform: none; } } }

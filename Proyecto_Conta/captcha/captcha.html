@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificación · Lechuty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&display=swap">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/auth.css">
+  <link rel="stylesheet" href="captcha.css">
+</head>
+<body class="auth">
+
+  <aside class="panel">
+    <header class="brand">
+      <img src="../assets/img/logo.png" alt="Lechuty" class="brand__logo">
+      <p class="brand__eyebrow">Contabilidad empresarial</p>
+      <h1 class="brand__name">Lechuty</h1>
+      <p class="brand__sub">Un clásico que siempre sabe mejor</p>
+    </header>
+    <img src="../assets/img/galleta.png" alt="" class="panel__galleta">
+  </aside>
+
+  <main class="pane">
+    <section class="form">
+      <h2 class="form__titulo">Verificación de seguridad</h2>
+      <p class="form__guia">Superaste el límite de intentos. Confirma que no eres un robot para volver a intentar.</p>
+      <div id="alerta" class="alert" role="alert" hidden><span id="alerta-texto"></span></div>
+
+      <form id="captcha-form" novalidate>
+        <div class="captcha"><div id="captcha-widget"></div></div>
+        <button type="submit" id="enviar" class="btn btn--block" disabled>
+          <span class="btn__spinner" aria-hidden="true" hidden></span>
+          <span class="btn__text">Continuar</span>
+        </button>
+      </form>
+
+      <p class="alt"><a href="../login/login.html">Volver al inicio de sesión</a></p>
+      <p class="nota">Acceso restringido a usuarios autorizados.</p>
+    </section>
+  </main>
+
+  <script src="../config/config.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/ui.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="captcha.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js?onload=cargarCaptcha&render=explicit&hl=es" async defer></script>
+</body>
+</html>

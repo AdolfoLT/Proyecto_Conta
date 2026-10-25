@@ -1,0 +1,96 @@
+/* home.css — estructura del home. Tokens y piezas comunes en ../assets/css/base.css */
+.wrap { width: 100%; max-width: 1040px; margin-inline: auto; padding-inline: 20px; }
+
+/* ---------- Barra superior ---------- */
+.top { background: var(--blue); }
+.top__in { display: flex; align-items: center; gap: 8px 28px; flex-wrap: wrap; min-height: 64px; padding-block: 8px; }
+.top__marca { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--display); font-size: 1.05rem; font-weight: 900; letter-spacing: -.02em; text-transform: uppercase; }
+.top__marca img { display: block; width: 40px; height: auto; }
+
+.nav { display: flex; gap: 2px; margin-right: auto; overflow-x: auto; }
+.nav a { padding: 8px 12px; color: var(--ink); font-size: .88rem; font-weight: 500; text-decoration: none; white-space: nowrap; opacity: .7; transition: opacity .15s; }
+.nav a[aria-current="page"] { opacity: 1; font-weight: 600; box-shadow: inset 0 -2px 0 var(--ink); }
+@media (hover: hover) and (pointer: fine) { .nav a:hover { opacity: 1; } }
+
+.top__user { display: flex; align-items: center; gap: 12px; font-size: .82rem; }
+.top__salir { padding: 6px 12px; font: inherit; font-size: .82rem; font-weight: 600; color: var(--ink); background: rgba(255, 255, 255, .55); border: 0; border-radius: var(--radius); cursor: pointer; transition: background-color .15s, transform .12s var(--ease); }
+.top__salir:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .top__salir:hover { background: #fff; } }
+
+/* ---------- Páginas ---------- */
+.page { padding-block: 40px 96px; }
+.cab { margin-bottom: 28px; }
+.cab h2 { font-family: var(--display); font-size: 1.9rem; font-weight: 800; line-height: 1.1; letter-spacing: -.025em; }
+.cab p { margin-top: 6px; max-width: 62ch; font-size: .9rem; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.conteo { min-height: 1.4em; margin: -8px 0 8px; font-size: .8rem; }
+.campo-corto { max-width: 480px; }
+.subform { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.subform h3 { margin-bottom: 18px; font-size: .72rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+.periodo { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 0 16px; margin-bottom: 24px; }
+.periodo .btn { margin-bottom: 18px; }
+.campo-largo { flex: 1 1 320px; }
+.check { display: flex; align-items: center; gap: 8px; margin-bottom: 26px; font-size: .85rem; color: var(--muted); cursor: pointer; }
+
+/* ---------- Catálogo ---------- */
+.tabla-wrap--alta { max-height: 360px; overflow-y: auto; }
+.tabla-wrap--alta thead th { position: sticky; top: 0; background: var(--milk); }
+#cat-filas tr { cursor: pointer; }
+@media (hover: hover) and (pointer: fine) { #cat-filas tr:hover td { background: var(--blue-soft); } }
+
+/* ---------- Póliza ---------- */
+.tabla--pol { margin-top: 8px; }
+.tabla--pol td { padding: 4px 6px; }
+.tabla--pol input { width: 100%; padding: 8px; font: inherit; font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); background: var(--field); border: 1px solid transparent; border-radius: var(--radius); transition: background-color .15s, border-color .15s, box-shadow .15s; }
+.tabla--pol input:focus { outline: none; background: #fff; border-color: var(--focus); box-shadow: 0 0 0 3px rgba(47, 143, 168, .22); }
+.tabla--pol .in-folio { min-width: 130px; text-align: left; font-family: var(--mono); font-size: .8rem; }
+.tabla--pol .nombre { padding-left: 12px; transition: padding-left .15s var(--ease); }
+.tabla--pol tr.es-haber .nombre { padding-left: 32px; }
+.tabla--pol .quitar { width: 28px; height: 28px; font-size: 1.1rem; line-height: 1; color: var(--muted); background: none; border: 0; border-radius: var(--radius); cursor: pointer; }
+.tabla--pol tfoot th, .tabla--pol tfoot td { padding: 10px 12px; font-weight: 600; border-bottom: 0; }
+.tabla--pol tfoot tr:first-child > * { border-top: 1px solid var(--ink); }
+.malo { color: var(--danger); }
+#pol-dif { transition: color .15s; }
+#pol-dif.ok { color: var(--ok); }
+#pol-dif.bad { color: var(--danger); }
+.pol__msg { min-height: 1.4em; margin-top: 12px; font-size: .82rem; color: var(--muted); }
+.pol__msg.is-ok { color: var(--ok); }
+.pol__msg.is-error { color: var(--danger); }
+
+/* ---------- Cuenta T ---------- */
+.cuenta-t { max-width: 520px; margin-top: 8px; border: 1px solid var(--ink); font-variant-numeric: tabular-nums; }
+.cuenta-t__titulo { padding: 8px 12px; text-align: center; font-size: .88rem; font-weight: 600; background: var(--blue); border-bottom: 1px solid var(--ink); }
+.cuenta-t__lados { display: grid; grid-template-columns: 1fr 1fr; }
+.cuenta-t__lados > ul + ul { border-left: 1px solid var(--ink); }
+.cuenta-t__lado { min-height: 56px; margin: 0; padding: 6px 0; list-style: none; font-size: .85rem; }
+.cuenta-t__lado li { display: flex; justify-content: space-between; gap: 12px; padding: 3px 12px; }
+.cuenta-t__sumas { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); font-size: .85rem; font-weight: 600; }
+.cuenta-t__sumas span { padding: 6px 12px; text-align: right; }
+.cuenta-t__saldo { padding: 8px 12px; text-align: center; font-size: .85rem; background: var(--field); border-top: 1px solid var(--ink); }
+.subcuentas { display: flex; flex-wrap: wrap; gap: 8px; max-width: 520px; margin-top: 16px; }
+.chip { padding: 6px 12px; font: inherit; font-size: .8rem; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; transition: background-color .15s, transform .12s var(--ease); }
+.chip:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .chip:hover { background: var(--blue-soft); } }
+
+/* ---------- Balanza y estados ---------- */
+.doc__cab { margin-bottom: 20px; text-align: center; }
+.doc__cab strong { display: block; font-family: var(--display); font-size: 1.1rem; font-weight: 800; letter-spacing: -.01em; }
+.doc__cab span { display: block; font-size: .85rem; color: var(--muted); }
+.tabla .titulo td, .tabla .titulo th { padding-top: 16px; font-weight: 700; }
+.tabla .subtotal td { font-weight: 600; border-top: 1px solid var(--ink); }
+.tabla .total td { font-weight: 700; border-top: 1px solid var(--ink); border-bottom: 3px double var(--ink); }
+.tabla tfoot td, .tabla tfoot th { font-weight: 700; border-top: 1px solid var(--ink); border-bottom: 0; }
+.doc__nota { margin-top: 14px; font-size: .78rem; color: var(--muted); }
+.doc__nota.is-ok { color: var(--ok); }
+.doc__nota.is-error { color: var(--danger); }
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .page { padding-block: 28px 72px; }
+  .cab h2 { font-size: 1.5rem; }
+  .top__user { margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .tabla--pol .nombre { transition: none; } }
